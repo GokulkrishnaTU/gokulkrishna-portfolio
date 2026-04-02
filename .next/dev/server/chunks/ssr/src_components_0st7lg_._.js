@@ -11,18 +11,129 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/value/use-scroll.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/value/use-transform.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$motion$2d$value$2d$event$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/utils/use-motion-value-event.mjs [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$spring$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/value/use-spring.mjs [app-ssr] (ecmascript)");
+// "use client";
+// import { useEffect, useRef, useState } from "react";
+// import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+// export default function ScrollyCanvas() {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
+//   const [images, setImages] = useState<HTMLImageElement[]>([]);
+//   const { scrollYProgress } = useScroll(); // tracks the whole page scroll
+//   // 192 frames loaded
+//   const frameCount = 192;
+//   useEffect(() => {
+//     // Preload images
+//     const loadedImages: HTMLImageElement[] = [];
+//     let loadedCount = 0;
+//     for (let i = 0; i < frameCount; i++) {
+//         const img = new Image();
+//         const numStr = i.toString().padStart(3, "0");
+//         img.src = `/sequence/frame_${numStr}_delay-0.041s.webp`;
+//         img.onload = () => {
+//             loadedCount++;
+//             if (loadedCount === frameCount) {
+//                // When all loaded, update state
+//                setImages(loadedImages);
+//             }
+//         };
+//         // fallback in case of load error to not break the counter
+//         img.onerror = () => {
+//             loadedCount++;
+//             if (loadedCount === frameCount) {
+//                setImages(loadedImages);
+//             }
+//         };
+//         loadedImages.push(img);
+//     }
+//   }, []);
+//   // Frame index mapped from 0 to 191 based on roughly 90% of scroll (leaving 10% for the footer)
+//   const frameIndex = useTransform(scrollYProgress, [0, 0.9], [0, frameCount - 1]);
+//   useMotionValueEvent(frameIndex, "change", (latest) => {
+//      if (images.length > 0 && canvasRef.current) {
+//         const ctx = canvasRef.current.getContext("2d");
+//         const idx = Math.max(0, Math.min(frameCount - 1, Math.floor(latest)));
+//         if (ctx && images[idx]) {
+//            drawCover(ctx, images[idx], canvasRef.current.width, canvasRef.current.height);
+//         }
+//      }
+//   });
+//   const drawCover = (ctx: CanvasRenderingContext2D, img: HTMLImageElement, canvasWidth: number, canvasHeight: number) => {
+//     if (!img || !img.width || !img.height) return;
+//     const imgRatio = img.width / img.height;
+//     const canvasRatio = canvasWidth / canvasHeight;
+//     let renderWidth, renderHeight, x, y;
+//     if (canvasRatio > imgRatio) {
+//         renderWidth = canvasWidth;
+//         renderHeight = canvasWidth / imgRatio;
+//         x = 0;
+//         y = (canvasHeight - renderHeight) / 2;
+//     } else {
+//         renderWidth = canvasHeight * imgRatio;
+//         renderHeight = canvasHeight;
+//         x = (canvasWidth - renderWidth) / 2;
+//         y = 0;
+//     }
+//     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+//     ctx.drawImage(img, x, y, renderWidth, renderHeight);
+//   };
+//   useEffect(() => {
+//     const handleResize = () => {
+//        if (canvasRef.current && images.length > 0) {
+//           canvasRef.current.width = window.innerWidth;
+//           canvasRef.current.height = window.innerHeight;
+//           const ctx = canvasRef.current.getContext("2d");
+//           if (ctx) {
+//              const idx = Math.max(0, Math.min(frameCount - 1, Math.floor(frameIndex.get())));
+//              drawCover(ctx, images[idx], canvasRef.current.width, canvasRef.current.height);
+//           }
+//        }
+//     };
+//     // Initial setup
+//     handleResize();
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, [images, frameIndex]);
+//   return (
+//     <div className="fixed top-0 left-0 w-full h-full -z-10 bg-[#0a0a0a]">
+//       {images.length < frameCount ? (
+//         <div className="flex w-full h-full items-center justify-center text-white/50 animate-pulse">
+//            Loading Sequence...
+//         </div>
+//       ) : (
+//         <canvas
+//           ref={canvasRef}
+//           className="w-full h-full block"
+//         />
+//       )}
+//     </div>
+//   );
+// }
 "use client";
 ;
 ;
 ;
 function ScrollyCanvas() {
     const canvasRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const containerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null); // Reference for the scroll height
     const [images, setImages] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    const { scrollYProgress } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useScroll"])(); // tracks the whole page scroll
-    // 192 frames loaded
+    // 1. INCREASE SCROLL TIME: 
+    // We track the scroll progress of the containerRef specifically.
+    const { scrollYProgress } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useScroll"])({
+        target: containerRef,
+        offset: [
+            "start start",
+            "end end"
+        ]
+    });
+    // 2. SMOOTHING (Optional but recommended):
+    // This adds a slight "weight" to the scroll so frames don't jump.
+    const smoothProgress = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$spring$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSpring"])(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
     const frameCount = 192;
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        // Preload images
         const loadedImages = [];
         let loadedCount = 0;
         for(let i = 0; i < frameCount; i++){
@@ -31,25 +142,19 @@ function ScrollyCanvas() {
             img.src = `/sequence/frame_${numStr}_delay-0.041s.webp`;
             img.onload = ()=>{
                 loadedCount++;
-                if (loadedCount === frameCount) {
-                    // When all loaded, update state
-                    setImages(loadedImages);
-                }
+                if (loadedCount === frameCount) setImages(loadedImages);
             };
-            // fallback in case of load error to not break the counter
             img.onerror = ()=>{
                 loadedCount++;
-                if (loadedCount === frameCount) {
-                    setImages(loadedImages);
-                }
+                if (loadedCount === frameCount) setImages(loadedImages);
             };
             loadedImages.push(img);
         }
     }, []);
-    // Frame index mapped from 0 to 191 based on roughly 90% of scroll (leaving 10% for the footer)
-    const frameIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTransform"])(scrollYProgress, [
+    // Map the smooth scroll progress (0 to 1) to your frame count
+    const frameIndex = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTransform"])(smoothProgress, [
         0,
-        0.9
+        1
     ], [
         0,
         frameCount - 1
@@ -94,7 +199,6 @@ function ScrollyCanvas() {
                 }
             }
         };
-        // Initial setup
         handleResize();
         window.addEventListener("resize", handleResize);
         return ()=>window.removeEventListener("resize", handleResize);
@@ -102,28 +206,48 @@ function ScrollyCanvas() {
         images,
         frameIndex
     ]);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed top-0 left-0 w-full h-full -z-10 bg-[#0a0a0a]",
-        children: images.length < frameCount ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex w-full h-full items-center justify-center text-white/50 animate-pulse",
-            children: "Loading Sequence..."
-        }, void 0, false, {
-            fileName: "[project]/src/components/ScrollyCanvas.tsx",
-            lineNumber: 101,
-            columnNumber: 9
-        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("canvas", {
-            ref: canvasRef,
-            className: "w-full h-full block"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ScrollyCanvas.tsx",
-            lineNumber: 105,
-            columnNumber: 9
-        }, this)
-    }, void 0, false, {
+    return(/** * THE FIX:
+     * h-[500vh] creates the scrollable room. 
+     * If you want it even slower, change it to h-[800vh].
+     */ /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        ref: containerRef,
+        className: "relative h-[500vh] bg-[#0a0a0a]",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "sticky top-0 left-0 w-full h-screen overflow-hidden",
+                children: images.length < frameCount ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex w-full h-full items-center justify-center text-white/50 animate-pulse",
+                    children: "Loading Sequence..."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ScrollyCanvas.tsx",
+                    lineNumber: 225,
+                    columnNumber: 11
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("canvas", {
+                    ref: canvasRef,
+                    className: "w-full h-full block"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ScrollyCanvas.tsx",
+                    lineNumber: 229,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/components/ScrollyCanvas.tsx",
+                lineNumber: 223,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "relative z-10 pointer-events-none"
+            }, void 0, false, {
+                fileName: "[project]/src/components/ScrollyCanvas.tsx",
+                lineNumber: 237,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/src/components/ScrollyCanvas.tsx",
-        lineNumber: 99,
+        lineNumber: 220,
         columnNumber: 5
-    }, this);
+    }, this));
 }
 }),
 "[project]/src/components/Overlay.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
