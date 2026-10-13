@@ -38,13 +38,13 @@ export default function About() {
           </div>
 
           <div className="flex gap-4">
-            <a href="#" className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform duration-300">
+            <a href="https://www.linkedin.com/in/gokul-krishna-3a4aba212/?isSelfProfile=true" className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform duration-300">
               <ArrowUpRight className="w-5 h-5" />
               <span>LinkedIn</span>
             </a>
-            <a href="#" className="flex items-center gap-2 bg-white/10 text-white border border-white/10 px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-colors duration-300">
+            <a href="https://github.com/GokulkrishnaTU" className="flex items-center gap-2 bg-white/10 text-white border border-white/10 px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-colors duration-300">
               <LinkIcon className="w-5 h-5" />
-              <span>Portfolio</span>
+              <span>Github</span>
             </a>
           </div>
         </div>
